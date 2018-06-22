@@ -1,0 +1,32 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="vue-app">
+        <h1>events</h1>
+        <button @click = "add(1)">older</button>
+        <button @click = "subt(1)">younger</button>
+        <button @dblclick = "add(10)">older 10</button>
+        <button @dblclick = "subt(10)">younger 10</button>
+        <p>my age is {{age}}</p>
+        <div id="canvas" v-on:mousemove="updataXY">
+            {{x}},{{y}}-
+            <span v-on:mousemove.stop="">stop moving</span>
+        </div>
+        <a @click="alert()" href="https://github.com/ours-is-the-fury">github</a>
+        <h1>keyboard</h1>
+        <label>name</label>
+        <input type="text" v-on:keyup.enter="logName">
+        <label>age</label>
+        <input type="text" v-on:keyup.enter="logAge">
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
