@@ -8,23 +8,98 @@
 </head>
 
 <body>
-    <div id="vue-app">
-        <h1>events</h1>
-        <button @click = "add(1)">older</button>
-        <button @click = "subt(1)">younger</button>
-        <button @dblclick = "add(10)">older 10</button>
-        <button @dblclick = "subt(10)">younger 10</button>
-        <p>my age is {{age}}</p>
-        <div id="canvas" v-on:mousemove="updataXY">
-            {{x}},{{y}}-
-            <span v-on:mousemove.stop="">stop moving</span>
+    <div class="vue-app">
+        <div>
+            <h1>events</h1>
+            <button @click="add(1)">older</button>
+            <button @click="subt(1)">younger</button>
+            <button @dblclick="add(10)">older 10</button>
+            <button @dblclick="subt(10)">younger 10</button>
+            <p>my age is {{age}}</p>
+            <div id="canvas" v-on:mousemove="updataXY">
+                {{x}},{{y}}-
+                <span v-on:mousemove.stop="">stop moving</span>
+            </div>
+            <a @click="alert()" href="https://github.com/ours-is-the-fury">github</a>
+            <h1>keyboard</h1>
+            <label>name</label>
+            <input ref="name" type="text" v-model="name">
+            <span>{{name}}</span>
+            <label>age</label>
+            <input ref="age" type="text" v-model="age">
+            <span>{{age}}</span>
         </div>
-        <a @click="alert()" href="https://github.com/ours-is-the-fury">github</a>
-        <h1>keyboard</h1>
-        <label>name</label>
-        <input type="text" v-on:keyup.enter="logName">
-        <label>age</label>
-        <input type="text" v-on:keyup.enter="logAge">
+        <div>
+            <h1>computed</h1>
+            <button v-on:click="a++">add to a</button>
+            <button v-on:click="b++">add to b</button>
+            <p>a - {{a}}</p>
+            <p>b - {{b}}</p>
+            <p>age + a = {{addtoa}}</p>
+            <p>age + b = {{addtob}}</p>
+        </div>
+        <div>
+            <h1>动态css绑定</h1>
+            <h2>示例1</h2>
+            <div v-on:click="changeColor = !changeColor" v-bind:class="{changeColor:changeColor}">
+                <span>heryy</span>
+            </div>
+            <h2>示例2</h2>
+            <button v-on:click="changeColor = !changeColor">changeColor</button>
+            <button v-on:click="changeLength = !changeLength">changeLength</button>
+            <div v-bind:class="compClasses">
+                <span>henry</span>
+            </div>
+        </div>
+        <div>
+            <h1>v-if</h1>
+            <button v-on:click="error = !error">toggle error</button>
+            <button v-on:click="success = !success">toggle success</button>
+            <p v-if="error">网络连接错误：404</p>
+            <p v-else-if="success">网络连接成功</p>
+            <p v-if="error">网络连接错误：404</p>
+            <p v-else-if="success">网络连接成功</p>
+        </div>
+        <div>
+            <h1>v-for</h1>
+            <ul>
+                <li v-for="x in characters">{{x}}</li>
+            </ul>
+            <ul>
+                <li v-for="(user,y) in users">
+                    {{y+1}}-{{user.name}}-{{user.age}}
+                </li>
+            </ul>
+            <template v-for="(user,index) in users">
+                <h3>{{index}}-{{user.name}}</h3>
+                <p>age-{{user.age}}</p>
+                <div v-for="(x,y) in user">
+                    <p>{{x}}-{{y}}</p>
+                </div>
+            </template>
+        </div>
+        <div>
+            <h1>小demo</h1>
+            <div id="bag" v-bind:class="{burst:ended}"></div>
+            <div id="bag-health">
+                <div v-bind:style="{width: health +'%'}"></div>
+            </div>
+            <div id= "controls">
+                <button @click="punch" v-show="!ended">使劲敲</button>
+                <button @click="restart">重新开始</button>
+            </div>
+        </div>
+    </div>
+    
+    <h1>多个实例</h1>
+    <div id="vueappone">
+        <h2>{{title}}</h2>
+        <p>{{greet}}</p>
+    </div>
+    <div id="vueapptwo">
+        <h2>{{title}}</h2>
+        <p>{{greet}}</p>
+        <button v-on:click="changeTitle">changeTitle</button>
     </div>
     <script src="app.js"></script>
 </body>
